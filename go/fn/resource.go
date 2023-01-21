@@ -48,6 +48,9 @@ func (r *Resources) AddConditionalResource(o Object) error {
 		r.Resources[gvkString] = []runtime.RawExtension{}
 	}
 	labels := o.GetLabels()
+	if len(labels) == 0 {
+		labels = map[string]string{}
+	}
 	labels[ConditionedResourceKey] = "true"
 	o.SetLabels(labels)
 	b, err := json.Marshal(o)
