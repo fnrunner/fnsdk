@@ -1,0 +1,7 @@
+{
+  "resources": {
+    "Upf.v1alpha1.nf.nephio.org": [
+      {"apiVersion":"nf.nephio.org/v1alpha1","kind":"Upf","metadata":{"name":"upf2","namespace":"default"},"spec":{"characteristics": "a"}}
+    ]
+  }
+}
