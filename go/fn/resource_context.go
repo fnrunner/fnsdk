@@ -11,6 +11,7 @@ const (
 	Group                  = "fnctrlr.nephio.org"
 	version                = "v1alpha1"
 	ConditionedResourceKey = Group + "/" + "conditioned"
+	ExternalResourceKey    = Group + "/" + "external"
 )
 
 // ResourceContextProcessor is implemented by configuration functions built with this framework

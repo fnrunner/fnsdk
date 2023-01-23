@@ -21,38 +21,32 @@ type Resources struct {
 	Resources map[string][]runtime.RawExtension `json:"resources" yaml:"resources"`
 }
 
-func (r *Resources) AddResource(o Object) error {
-	gvkString := GetGVKString(o)
-	_, ok := r.Resources[gvkString]
-	if !ok {
-		r.Resources[gvkString] = []runtime.RawExtension{}
-	}
-	b, err := json.Marshal(o)
-	if err != nil {
-		return err
-	}
-	present, idx := isPresent(r.Resources[gvkString], o)
-	if !present {
-		r.Resources[gvkString] = append(r.Resources[gvkString], runtime.RawExtension{Raw: b})
-	} else {
-		// overwrite
-		r.Resources[gvkString][idx] = runtime.RawExtension{Raw: b}
-	}
-	return nil
+type ResourceParameters struct {
+	Conditioned bool
+	External    bool
 }
 
-func (r *Resources) AddConditionalResource(o Object) error {
+func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
 	gvkString := GetGVKString(o)
 	_, ok := r.Resources[gvkString]
 	if !ok {
 		r.Resources[gvkString] = []runtime.RawExtension{}
 	}
+	// update the labels according to the 
 	labels := o.GetLabels()
 	if len(labels) == 0 {
 		labels = map[string]string{}
 	}
-	labels[ConditionedResourceKey] = "true"
+	if p != nil {
+		if p.Conditioned {
+			labels[ConditionedResourceKey] = "true"
+		}
+		if p.External {
+			labels[ExternalResourceKey] = "true"
+		}
+	}
 	o.SetLabels(labels)
+	// marshal the data
 	b, err := json.Marshal(o)
 	if err != nil {
 		return err

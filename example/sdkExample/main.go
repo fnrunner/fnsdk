@@ -27,6 +27,6 @@ func (r *implA) Run(ctx *fn.Context, functionConfig map[string]runtime.RawExtens
 	res.SetKind("A")
 	res.SetName("implA")
 	res.SetNamespace("default")
-	resources.AddConditionalResource(res)
+	resources.AddResource(res, &fn.ResourceParameters{Conditioned: true, External: true})
 	return true
 }
