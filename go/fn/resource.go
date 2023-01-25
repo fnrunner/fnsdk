@@ -51,6 +51,7 @@ func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println()
 	present, idx := isPresent(r.Resources[gvkString], o)
 	if !present {
 		r.Resources[gvkString] = append(r.Resources[gvkString], runtime.RawExtension{Raw: b})
