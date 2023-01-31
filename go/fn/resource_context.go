@@ -8,10 +8,10 @@ import (
 )
 
 const (
-	Group                  = "fnctrlr.nephio.org"
+	Group                  = "fnctrlr.lcnc.io"
 	version                = "v1alpha1"
 	ConditionedResourceKey = Group + "/" + "conditioned"
-	ExternalResourceKey    = Group + "/" + "external"
+	InternalResourceKey    = Group + "/" + "internal"
 )
 
 // ResourceContextProcessor is implemented by configuration functions built with this framework

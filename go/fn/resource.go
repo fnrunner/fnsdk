@@ -23,7 +23,7 @@ type Resources struct {
 
 type ResourceParameters struct {
 	Conditioned bool
-	External    bool
+	Internal    bool
 }
 
 func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
@@ -32,7 +32,7 @@ func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
 	if !ok {
 		r.Resources[gvkString] = []runtime.RawExtension{}
 	}
-	// update the labels according to the 
+	// update the labels according to the
 	labels := o.GetLabels()
 	if len(labels) == 0 {
 		labels = map[string]string{}
@@ -41,8 +41,8 @@ func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
 		if p.Conditioned {
 			labels[ConditionedResourceKey] = "true"
 		}
-		if p.External {
-			labels[ExternalResourceKey] = "true"
+		if p.Internal {
+			labels[InternalResourceKey] = "true"
 		}
 	}
 	o.SetLabels(labels)
@@ -51,7 +51,6 @@ func (r *Resources) AddResource(o Object, p *ResourceParameters) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println()
 	present, idx := isPresent(r.Resources[gvkString], o)
 	if !present {
 		r.Resources[gvkString] = append(r.Resources[gvkString], runtime.RawExtension{Raw: b})
