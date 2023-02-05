@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 
-	"github.com/henderiw-k8s-lcnc/fn-sdk/go/fn"
+	"github.com/fnrunner/fnsdk/go/fn"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 )

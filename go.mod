@@ -1,4 +1,4 @@
-module github.com/henderiw-k8s-lcnc/fn-sdk
+module github.com/fnrunner/fnsdk
 
 go 1.19
 
